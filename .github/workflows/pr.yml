@@ -1,0 +1,17 @@
+name: prprobe
+on:
+  pull_request:
+  pull_request_target:
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - name: restore
+        uses: actions/cache@v4
+        with:
+          path: cachebox
+          key: b74-pwn-branch
+      - run: |
+          mkdir -p cachebox
+          echo "FROM-PR-MERGE" > cachebox/marker.txt
+          if [ -f cachebox/marker.txt ]; then echo "MARKER: $(cat cachebox/marker.txt)"; fi
