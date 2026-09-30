@@ -1,0 +1,16 @@
+name: cachemaker
+on:
+  workflow_dispatch:
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - name: restore
+        id: c
+        uses: actions/cache@v4
+        with:
+          path: cachebox
+          key: b74-pwn-attack
+      - name: write-if-miss
+        run: |
+          if [ -f cachebox/marker.txt ]; then echo "RESTORED: $(cat cachebox/marker.txt)"; else mkdir -p cachebox; echo "FROM-MAIN" > cachebox/marker.txt; echo "MISS: wrote FROM-MAIN"; fi
