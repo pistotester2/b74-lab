@@ -1,0 +1,14 @@
+name: cacherestore
+on:
+  workflow_dispatch:
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - name: restore
+        uses: actions/cache@v4
+        with:
+          path: cachebox
+          key: b74-pwn-branch
+      - run: |
+          if [ -f cachebox/marker.txt ]; then echo "POISONED: $(cat cachebox/marker.txt)"; else echo "ISOLATED: no cache on main"; fi
