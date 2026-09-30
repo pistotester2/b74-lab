@@ -1,9 +1,0 @@
-name: prprobe
-on:
-  pull_request:
-  pull_request_target:
-jobs:
-  t:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "EVENT=${{ github.event_name }} ACTOR=${{ github.actor }} PR=${{ github.event.number }}"
